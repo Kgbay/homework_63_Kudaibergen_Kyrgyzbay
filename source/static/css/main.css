@@ -1,0 +1,105 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.navbar {
+    margin: 0 !important;
+    padding: 0;
+}
+.navbar, .footer {
+    background-color: #9999ff !important;
+}
+.navbar-nav {
+    margin-left: auto;
+}
+.btn {
+    margin: 5px;
+}
+.btn-info {
+    color: white !important;
+}
+.navbar-toggler {
+    background-color: white !important;
+}
+.navbar-brand {
+    font-size: 30px !important;
+    font-family: 'Shantell Sans', cursive;
+    font-weight: bold;
+}
+.btn-outline-primary, .navbar-brand {
+    border-color: white !important;
+    color: white !important;
+}
+.btn-outline-primary:hover {
+    background-color: white !important;
+    color: #008000 !important;
+}
+.container {
+    margin: auto;
+    padding: 5px;
+}
+@media only screen and (max-width: 767px) {
+  .card {
+    width: 100% !important;
+    margin: 10px 0 !important;
+  }
+  .pagination-side {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 400px ){
+    .pagination-center {
+    display: none !important;
+  }
+}
+.btn-primary {
+    background-color: #00008B !important;
+    border-color: white !important;
+    border-radius: 10px !important;
+}
+form, .form-control {
+    border-color: white !important;
+    border-style: solid;
+    padding: 20px !important;
+    border-radius: 30px;
+}
+.form-rm-confirm {
+    border-style: none !important;
+}
+.submit:hover{
+    background-color: #ffcc99 !important;
+    color: white;
+}
+a:link {
+    text-decoration: none;
+}
+.card {
+    margin-top: 20px;
+}
+.products-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.form-add {
+    background-color: #9999ff;
+}
+footer {
+    height: 100px;
+    width: auto;
+    margin-top: auto;
+    margin: 0;
+}
+.logout-btn {
+    border-color: transparent !important;
+    padding: 0 !important;
+}
+.form-search {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+

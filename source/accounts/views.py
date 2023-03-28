@@ -32,29 +32,17 @@ class LoginView(TemplateView):
             messages.warning(request, "Пользователь не найден либо неверный пароль")
             return redirect('login')
         login(request, user)
-        messages.success(request, 'Добро пожаловать')
+        messages.success(request, f'Добро пожаловать{username}')
         next = request.GET.get('next')
         if next:
             return redirect(next)
         return redirect('index')
 
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-class RegisterView(CreateView):
-    template_name = 'register.html'
-    form_class = CustomUserCreationForm
-    success_url = '/'
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect(self.success_url)
-        context = {'form': form}
-        return self.render_to_response(context)
 
 class RegisterView(CreateView):
     template_name = 'register.html'
@@ -69,6 +57,7 @@ class RegisterView(CreateView):
             return redirect(self.success_url)
         context = {'form': form}
         return self.render_to_response(context)
+
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
@@ -79,14 +68,14 @@ class ProfileView(LoginRequiredMixin, DetailView):
     paginate_related_orphans = 0
 
     def get_context_data(self, **kwargs):
-        articles = self.object.articles.order_by('-created_at')
-        paginator = Paginator(articles,
+        posts = self.object.posts.order_by('-created_at')
+        paginator = Paginator(posts,
                               self.paginate_related_by,
                               orphans=self.paginate_related_orphans)
         page_number = self.request.GET.get('page', 1)
         page = paginator.get_page(page_number)
         kwargs['page_obj'] = page
-        kwargs['articles'] = page.object_list
+        kwargs['posts'] = page.object_list
         kwargs['is_paginated'] = page.has_other_pages()
         return super().get_context_data(**kwargs)
 

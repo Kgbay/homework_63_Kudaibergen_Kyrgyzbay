@@ -10,10 +10,9 @@ class Post(models.Model):
         verbose_name="Описание поста"
     )
     image = models.ImageField(
-        null=True,
-        blank=True,
-        upload_to='user_picture',
-        verbose_name='Аватар'
+        null=False,
+        upload_to='user_picture/',
+        verbose_name='Изображения'
     )
     point = models.CharField(
         max_length=255,
@@ -25,7 +24,7 @@ class Post(models.Model):
         )
     user = models.ForeignKey(
         to=User,
-        related_name='post_user',
+        related_name='posts',
         verbose_name='Пользователь',
         null=False,
         on_delete=models.CASCADE

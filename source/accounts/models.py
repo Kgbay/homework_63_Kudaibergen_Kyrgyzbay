@@ -17,12 +17,6 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Профиль пользователя'
     )
-    login = models.CharField(
-        max_length=30,
-        null=False,
-        blank=False,
-        verbose_name='логин'
-    )
     first_name = models.CharField(
         max_length=200,
         null=True,
@@ -67,7 +61,7 @@ class Profile(models.Model):
     )
     bio = models.TextField(
         max_length=3000,
-        null=True,
+        null=False,
         verbose_name='Биография пользователя')
     subscribers_count = models.PositiveIntegerField(
         verbose_name='Количество подписчиков',
@@ -106,4 +100,8 @@ class Profile(models.Model):
         self.save()
 
     def __str__(self):
-        return f"{self.login}, {self.first_name}, {self.email}"
+        return f"{self.first_name}, {self.email}"
+
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'

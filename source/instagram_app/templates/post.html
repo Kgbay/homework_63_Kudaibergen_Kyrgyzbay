@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Task view{% endblock %}
+{% block content %}
+     <div class="container">
+          <div class="products-card">
+             <div class="card">
+                 <div class="card-body">
+                    <h3>Описание: {{ post.desc }}</h3>
+                     <p>Пользователь: {{ post.user }}<br>
+                     <a href="{% url 'index' %}"  class="btn btn-success">Назад</a>
+
+                 </div>
+             </div>
+         </div>
+     </div>
+{% endblock %}

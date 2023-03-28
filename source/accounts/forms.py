@@ -6,11 +6,11 @@ from .models import Profile
 
 
 class LoginForm(forms.Form):
-    login = forms.CharField(required=True, label='Логин')
+    username = forms.CharField(required=True, label='Логин')
     password = forms.CharField(required=True, label='Пароль',
                                widget=forms.PasswordInput)
 
-    login.widget.attrs.update({'class': 'form-control form-control-lg'})
+    username.widget.attrs.update({'class': 'form-control form-control-lg'})
     password.widget.attrs.update({'class': 'form-control form-control-lg'})
 
 
@@ -32,14 +32,23 @@ class CustomUserCreationForm(forms.ModelForm):
         required=True,
         widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
     )
+    username = forms.CharField(
+        label='Логин',
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
+    )
+    avatar = forms.ImageField(
+        label='Логин',
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
+    )
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password',
                   'password_confirm', 'first_name',
-                  'last_name')
+                  'last_name', 'avatar')
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-control-lg'})
         }
@@ -50,6 +59,7 @@ class CustomUserCreationForm(forms.ModelForm):
             'password_confirm': 'Подтвердите пароль',
             'first_name': 'Имя',
             'last_name': 'Фамилия',
+            'avatar': 'аватар'
         }
 
     def clean(self):

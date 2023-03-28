@@ -3,7 +3,7 @@
 {% block content %}
   <div class="container">
     <h1>Добавить пост</h1>
-        <form action="{% url 'post_update' post.pk %}" method="post" class="form-add">
+        <form action="{% url 'post_update' post.pk %}" method="post">
               {% include 'partial/post_form.html' with button_text='Создать' %}
         </form>
   </div>

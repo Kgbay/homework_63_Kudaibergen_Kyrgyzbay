@@ -24,13 +24,13 @@ class LoginView(TemplateView):
         form = self.form(request.POST)
         if not form.is_valid():
             messages.error(request, 'Некорректные данные')
-            return redirect('login')
+            return redirect('accounts:login')
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(request, username=username, password=password)
         if not user:
             messages.warning(request, "Пользователь не найден либо неверный пароль")
-            return redirect('login')
+            return redirect('accounts:login')
         login(request, user)
         messages.success(request, f'Добро пожаловать{username}')
         next = request.GET.get('next')

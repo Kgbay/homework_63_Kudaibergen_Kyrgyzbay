@@ -5,19 +5,16 @@ from .models import Post
 
 
 class PostForm(forms.ModelForm):
+    image = forms.ImageField()
     class Meta:
         model = Post
-        fields = ('desc', 'point', 'location', 'image')
+        fields = ('desc', 'image')
         widgets = {
             'desc': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
-            'point': forms.TextInput(attrs={'class': 'form-control form-control-lg'})
         }
         labels = {
             'desc': 'Описание поста',
-            'image': 'Изображения',
-            'point': 'Местоположения',
-            'location': 'Карта',
-            'user': 'Пользователь'
+            'image': 'Изображения'
         }
 
     def clean(self):

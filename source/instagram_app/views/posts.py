@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -20,15 +21,16 @@ class GroupPermissionMixin(UserPassesTestMixin):
 
 class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'post_create.html'
-    model = Post
     form_class = PostForm
+    success_url = '/'
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(PostCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        return reverse('post_view', kwargs={'pk': self.object.pk})
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(self.success_url)
+        context = {'form': form}
+        return self.render_to_response(context)
 
 
 class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

@@ -17,28 +17,10 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Профиль пользователя'
     )
-    first_name = models.CharField(
-        max_length=200,
-        null=True,
-        blank=True,
-        verbose_name='Имя пользователя',
-    )
-    last_name = models.CharField(
-        max_length=200,
-        null=True,
-        blank=True,
-        verbose_name='Фамилия пользователя',
-    )
     birth_date = models.DateField(
         null=True,
         blank=True,
         verbose_name='Дата рождения'
-    )
-    email = models.EmailField(
-        max_length=254,
-        null=False,
-        blank=False,
-        verbose_name='Электронная почта',
     )
     phone = PhoneNumberField(
         null=False,
@@ -100,7 +82,7 @@ class Profile(models.Model):
         self.save()
 
     def __str__(self):
-        return f"{self.first_name}, {self.email}"
+        return f"{self.user}, {self.birth_date}"
 
     class Meta:
         verbose_name = 'Профиль'

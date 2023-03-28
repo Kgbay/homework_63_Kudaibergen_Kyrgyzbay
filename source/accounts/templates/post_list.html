@@ -4,12 +4,11 @@
               <div class="card-body">
                 <h5 class="card-title">{{ post.desc }}</h5>
                 <p class="card-text">{{ post.user }}</p>
-                <p class="card-text"><small class="text-muted">{{ post.location }}</small></p>
               </div>
               <img class="card-img-bottom" src="/uploads/{{ post.image }}" alt="Card image cap">
             </div>
         {% empty %}
-            <h2 class="text-center">Нет статей</h2>
+            <h2 class="text-center">Нет постов</h2>
     {% endfor %}
 </div>
 

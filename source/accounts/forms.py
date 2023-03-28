@@ -29,7 +29,7 @@ class CustomUserCreationForm(forms.ModelForm):
     )
     email = forms.CharField(
         label='Электронная почта',
-        required=True,
+        required=False,
         widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
     )
     username = forms.CharField(
@@ -38,16 +38,30 @@ class CustomUserCreationForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
     )
     avatar = forms.ImageField(
-        label='Логин',
+        label='Аватар',
         required=False,
+    )
+    phone = forms.IntegerField(
+        label='Телефон'
+    )
+    sex = forms.CharField(
+        label='Пол',
+        widget=forms.Select()
+    )
+    bio = forms.CharField(
+        label='Описание',
         widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
+    )
+    birth_date = forms.DateField(
+        label='Дата рождения'
     )
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password',
                   'password_confirm', 'first_name',
-                  'last_name', 'avatar')
+                  'last_name', 'phone', 'sex', 'bio',
+                  'birth_date')
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-control-lg'})
@@ -59,7 +73,11 @@ class CustomUserCreationForm(forms.ModelForm):
             'password_confirm': 'Подтвердите пароль',
             'first_name': 'Имя',
             'last_name': 'Фамилия',
-            'avatar': 'аватар'
+            'avatar': 'аватар',
+            'phone': 'телефон',
+            'sex': 'Пол',
+            'bio': 'Биография',
+            'birth_date': 'Дата рождения'
         }
 
     def clean(self):
@@ -79,8 +97,10 @@ class CustomUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get('password'))
+        user.groups.add('user')
         if commit:
             user.save()
+            Profile.objects.get_or_create(user=user)
         return user
 
 class UserChangeForm(forms.ModelForm):

@@ -8,24 +8,7 @@ body {
     padding: 0;
 }
 .navbar, .footer {
-    background-color: #9999ff !important;
-}
-.navbar-nav {
-    margin-left: auto;
-}
-.btn {
-    margin: 5px;
-}
-.btn-info {
-    color: white !important;
-}
-.navbar-toggler {
-    background-color: white !important;
-}
-.navbar-brand {
-    font-size: 30px !important;
-    font-family: 'Shantell Sans', cursive;
-    font-weight: bold;
+    background-color: transparent !important;
 }
 .btn-outline-primary, .navbar-brand {
     border-color: white !important;
@@ -39,7 +22,7 @@ body {
     margin: auto;
     padding: 5px;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1000px) {
   .card {
     width: 100% !important;
     margin: 10px 0 !important;
@@ -59,7 +42,7 @@ body {
     border-radius: 10px !important;
 }
 form, .form-control {
-    border-color: white !important;
+    border-color: gray !important;
     border-style: solid;
     padding: 20px !important;
     border-radius: 30px;
@@ -75,16 +58,8 @@ a:link {
     text-decoration: none;
 }
 .card {
-    margin-top: 20px;
-}
-.products-card {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.form-add {
-    background-color: #9999ff;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 footer {
     height: 100px;
@@ -96,6 +71,11 @@ footer {
     border-color: transparent !important;
     padding: 0 !important;
 }
+.input-logout{
+    background-color: transparent;
+    border: transparent;
+    padding: 0;
+}
 .form-search {
     display: flex;
     align-items: baseline;
@@ -105,7 +85,7 @@ footer {
 .avatar {
     display: inline-block;
     float: left;
-    width: 250px;
+    width: 300px;
     height: auto;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -113,8 +93,31 @@ footer {
 .text-center {
     text-align: center;
 }
-.clear {
-    clear: both;
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; /* Height of navbar */
+  width: 240px;
+  z-index: 600;
 }
-
-
+.list-group-item {
+    border-color: transparent !important;
+}
+.form-login {
+    padding: 30px 0;
+    border: 2px solid gray;
+    width: 50%;
+}
+.insta-login {
+    display: flex;
+    flex-flow: center;
+}
+.instagram-header {
+    text-align: center;
+}
+.instagram-login {
+    border: transparent;
+}

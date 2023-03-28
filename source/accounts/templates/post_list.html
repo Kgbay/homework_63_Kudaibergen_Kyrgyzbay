@@ -1,18 +1,17 @@
 <div class="container">
     {% for post in posts %}
-    <div class="box">
-        <h3><a href="{% url 'post_view' post.pk %}">{{ post.name }}</a></h3>
-        <p>Статус: </p>
-        <p>Published at: </p>
-        {% if perms.instagram_app.change_post or post.author == request.user %}
-            <p><a href="{% url 'post_update' post.pk %}" class="btn btn-success">Update</a></p>
-        {% endif %}
-        {% if perms.instagram_app.delete_post or post.author == request.user %}
-            <p><a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">Delete</a></p>
-        {% endif %}
-    </div>
-{% empty %}
-    <h2 class="text-center">Нет статей</h2>
-{% endfor %}
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ post.desc }}</h5>
+                <p class="card-text">{{ post.user }}</p>
+                <p class="card-text"><small class="text-muted">{{ post.location }}</small></p>
+              </div>
+              <img class="card-img-bottom" src="/uploads/{{ post.image }}" alt="Card image cap">
+            </div>
+        {% empty %}
+            <h2 class="text-center">Нет статей</h2>
+    {% endfor %}
 </div>
+
+
 

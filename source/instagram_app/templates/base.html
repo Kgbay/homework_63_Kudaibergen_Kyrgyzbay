@@ -29,11 +29,12 @@
                     <a href="{% url 'index' %}" class="btn btn-outline-primary">На главную</a>
                     <a href="{% url 'accounts:register' %}" class="btn btn-outline-primary">Зарегистрироваться</a>
                     {% if user.is_authenticated %}
+
                     <form action="{% url 'accounts:logout' %}" method="post" class="logout-btn">
                             {% csrf_token %}
                             <input type="submit" value="Выйти" class="btn btn-outline-primary">
-                        <a href="{% url 'accounts:profile' user.pk %}" class="btn btn-outline-primary">{{ user.username }}</a>
                     </form>
+                    <a href="{% url 'accounts:profile' user.pk %}" class="btn btn-outline-primary">{{ user.username }}</a>
                     <a href="{% url 'accounts:change' user.pk %}" class="btn btn-outline-primary">Изменить профайл</a>
                     <a href="{% url 'post_add' %}" class="btn btn-outline-primary">Добавить пост</a>
                     {% else %}

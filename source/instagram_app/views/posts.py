@@ -22,7 +22,6 @@ class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'post_create.html'
     model = Post
     form_class = PostForm
-    success_message = 'Пост создан'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -36,7 +35,6 @@ class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'post_update.html'
     form_class = PostForm
     model = Post
-    success_message = 'Пост обновлен'
 
     def get_success_url(self):
         return reverse('post_view', kwargs={'pk': self.object.pk})
@@ -46,4 +44,3 @@ class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = 'post_confirm_remove.html'
     model = Post
     success_url = reverse_lazy('index')
-    success_message = 'Пост удален'

@@ -15,51 +15,34 @@ class Profile(models.Model):
         get_user_model(),
         related_name='profile',
         on_delete=models.CASCADE,
-        verbose_name='Профиль пользователя'
+        verbose_name='Профиль пользователя',
     )
     birth_date = models.DateField(
         null=True,
-        blank=True,
         verbose_name='Дата рождения'
     )
     phone = PhoneNumberField(
-        null=False,
-        blank=False,
-        unique=True,
+        null=True,
         verbose_name='Телефон номера'
     )
     avatar = models.ImageField(
         null=True,
         blank=True,
         upload_to='user_picture',
-        verbose_name='Аватар'
+        verbose_name='Аватар',
+        default='logo_image.png'
     )
     sex = models.CharField(
         max_length=100,
-        null=False,
+        null=True,
         choices=SexChoice.choices,
         verbose_name='Пол',
         default=SexChoice.MALE
     )
     bio = models.TextField(
         max_length=3000,
-        null=False,
+        null=True,
         verbose_name='Биография пользователя')
-    subscribers_count = models.PositiveIntegerField(
-        verbose_name='Количество подписчиков',
-        null=False,
-        default=0
-    )
-    subscriptions_count = models.PositiveIntegerField(
-        verbose_name='Количество подписок',
-        null=False,
-        default=0
-    )
-    publications_count = models.PositiveIntegerField(
-        verbose_name='Количество публикации',
-        null=False,
-        default=0
-    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата и время создание"
@@ -80,6 +63,7 @@ class Profile(models.Model):
         self.is_deleted = True
         self.deleted_at = timezone.now()
         self.save()
+
 
     def __str__(self):
         return f"{self.user}, {self.birth_date}"

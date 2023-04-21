@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 from .models import Profile
 
@@ -42,18 +42,22 @@ class CustomUserCreationForm(forms.ModelForm):
         required=False,
     )
     phone = forms.IntegerField(
-        label='Телефон'
+        label='Телефон',
+        required=False
     )
     sex = forms.CharField(
         label='Пол',
-        widget=forms.Select()
+        widget=forms.Select(),
+        required=False
     )
     bio = forms.CharField(
         label='Описание',
-        widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'})
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+        required=False
     )
     birth_date = forms.DateField(
-        label='Дата рождения'
+        label='Дата рождения',
+        required=False
     )
 
     class Meta:
@@ -85,30 +89,25 @@ class CustomUserCreationForm(forms.ModelForm):
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
         password_confirm = cleaned_data.get('password_confirm')
-        first_name = cleaned_data.get('first_name')
-        last_name = cleaned_data.get('last_name')
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError('Пароли не совпадают')
         if len(str(username).strip()) < 2:
             raise forms.ValidationError('Имя не может быть пустым')
-        if first_name == last_name:
-            raise forms.ValidationError('Имя и фамилия не могут быть одинаковыми')
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get('password'))
-        user.groups.add('user')
         if commit:
             user.save()
             Profile.objects.get_or_create(user=user)
         return user
 
+
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email')
         labels = {'first_name': 'Имя',
-                  'username': 'Логин',
                   'last_name': 'Фамилия',
                   'email': 'Почта'}
 
@@ -117,3 +116,33 @@ class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields =('phone', 'sex', 'bio', 'avatar', 'birth_date')
+
+class PasswordChangeForm(forms.ModelForm):
+    password = forms.CharField(label="Новый пароль", strip=False, widget=forms.PasswordInput)
+    password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    old_password = forms.CharField(label="Старый пароль", strip=False, widget=forms.PasswordInput)
+
+
+    def clean_password_confirm(self):
+        password = self.cleaned_data.get("password")
+        password_confirm = self.cleaned_data.get("password_confirm")
+        if password and password_confirm and password != password_confirm:
+            raise forms.ValidationError('Пароли не совпадают!')
+        return password_confirm
+
+    def clean_old_password(self):
+        old_password = self.cleaned_data.get('old_password')
+        if not self.instance.check_password(old_password):
+            raise forms.ValidationError('Старый пароль неправильный!')
+        return old_password
+
+    def save(self, commit=True):
+        user = self.instance
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = get_user_model()
+        fields = ['password', 'password_confirm', 'old_password']

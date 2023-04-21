@@ -1,39 +1,27 @@
-body {
-    min-height: 100vh;
+.body-block {
+  box-sizing: border-box;
+  display: flex;
+}
+footer {
+    height: 100px;
+    width: auto;
+    margin-top: auto;
+    margin: 0;
+}
+.header {
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
-.navbar {
-    margin: 0 !important;
-    padding: 0;
+.logo-img {
+    padding-left: 60px;
 }
-.navbar, .footer {
-    background-color: transparent !important;
-}
-.btn-outline-primary, .navbar-brand {
-    border-color: white !important;
-    color: white !important;
-}
-.btn-outline-primary:hover {
-    background-color: white !important;
-    color: #008000 !important;
-}
-.container {
-    margin: auto;
-    padding: 5px;
+.card {
+    margin-top: 20px;
 }
 @media only screen and (max-width: 1000px) {
   .card {
     width: 100% !important;
     margin: 10px 0 !important;
-  }
-  .pagination-side {
-    display: none !important;
-  }
-}
-@media only screen and (max-width: 400px ){
-    .pagination-center {
-    display: none !important;
   }
 }
 .btn-primary {
@@ -56,16 +44,6 @@ form, .form-control {
 }
 a:link {
     text-decoration: none;
-}
-.card {
-    margin-left: 200px;
-    margin-right: 200px;
-}
-footer {
-    height: 100px;
-    width: auto;
-    margin-top: auto;
-    margin: 0;
 }
 .logout-btn {
     border-color: transparent !important;
@@ -93,15 +71,11 @@ footer {
 .text-center {
     text-align: center;
 }
-/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  padding: 58px 0 0; /* Height of navbar */
-  width: 240px;
-  z-index: 600;
 }
 .list-group-item {
     border-color: transparent !important;
@@ -110,14 +84,4 @@ footer {
     padding: 30px 0;
     border: 2px solid gray;
     width: 50%;
-}
-.insta-login {
-    display: flex;
-    flex-flow: center;
-}
-.instagram-header {
-    text-align: center;
-}
-.instagram-login {
-    border: transparent;
 }

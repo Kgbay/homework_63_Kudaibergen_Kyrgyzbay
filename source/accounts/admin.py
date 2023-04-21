@@ -8,9 +8,7 @@ from .models import Profile
 class ProfileInline(admin.StackedInline):
     model = Profile
     fields = ('birth_date', 'phone', 'avatar',
-              'sex', 'bio', 'subscribers_count',
-              'subscriptions_count', 'publications_count',
-              'is_deleted')
+              'sex', 'bio', 'is_deleted')
 
 
 class ProfileAdmin(UserAdmin):

@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.utils.http import urlencode
 from django.views.generic import ListView, RedirectView
-from geopy.geocoders import Nominatim
 
 from instagram_app.forms import SearchForm
 from instagram_app.models import Post
@@ -11,6 +10,7 @@ class IndexView(ListView):
     template_name = 'index.html'
     model = Post
     context_object_name = 'posts'
+    ordering = ['-created_at']
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()

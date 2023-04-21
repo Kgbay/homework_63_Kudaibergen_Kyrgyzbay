@@ -121,8 +121,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'

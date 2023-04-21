@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Instagram - Add post{% endblock %}
 {% block content %}
-  <div class="container">
-        <div class="insta-login">
-            <div class="form-login">
-            <h1 class="instagram-header">Instagram</h1>
-           <form action="{% url 'post_add' %}" method="post" class="instagram-login">
-              {% include 'partial/post_form.html' with button_text='Создать' %}
-           </form>
-          {% if img_obj %}
-            <h3>Succesfully uploaded : {{img_obj.caption}}</h3>
-             <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
-          {% endif %}
-        </div>
-        </div>
+<div class="container">
+  <div class="insta-login">
+    <div class="form-login">
+      <h1 class="instagram-header">Instagram</h1>
+      <form action="{% url 'post_add' %}" method="post" class="instagram-login" enctype="multipart/form-data">
+        {% include 'partial/post_form.html' with button_text='Создать' %}
+      </form>
+      {% if img_obj %}
+      <h3>Succesfully uploaded : {{img_obj.caption}}</h3>
+      <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+      {% endif %}
+    </div>
   </div>
+</div>
 {% endblock content %}

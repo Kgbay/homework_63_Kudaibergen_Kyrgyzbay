@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Confirm delete page{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1>Вы точно хотите удалить данные {{ post.text }}?</h1>
-        <div class="row justify-content-center align-items-center">
-            <div class="col">
-                <p><b>{{ post.text }}</b></p>
-                <p>{{ post.description }}</p>
-            </div>
-            <form action="{% url 'confirm_delete' post.pk %}" method="post" class="form-rm-confirm">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-danger" value="Да">
-                <a href="{% url 'index' %}" class="btn btn-success">Нет</a>
-            </form>
+<div class="container">
+    <h1>Вы точно хотите удалить данные {{ post.text }}?</h1>
+    <div class="row justify-content-center align-items-center">
+        <div class="col">
+            <p><b>{{ post.text }}</b></p>
+            <p>{{ post.description }}</p>
         </div>
+        <form action="{% url 'confirm_delete' post.pk %}" method="post" class="form-rm-confirm">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Да">
+            <a href="{% url 'index' %}" class="btn btn-success">Нет</a>
+        </form>
     </div>
+</div>
 {% endblock %}
